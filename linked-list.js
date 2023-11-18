@@ -81,6 +81,35 @@ export default class LinkedList {
     tmp.nextNode = null; // point to null
   }
 
+  // return boolean value whether passed-in value is in list
+  contains(value) {
+    let tmp = this.listHead; // point tmp to listHead
+    while (tmp !== null) {
+      // if tmp value equals passed-in value, return true
+      if (tmp.value === value) return true;
+      tmp = tmp.nextNode; // traverse
+    }
+
+    return false;
+  }
+
+  // return index of node containing value
+  // return null if value not found
+  find(value) {
+    let count = 0;
+
+    let tmp = this.listHead; // point tmp to listHead
+    // while tmp isn't null
+    while (tmp !== null) {
+      // if tmp value equals passed-in value, return count
+      if (tmp.value === value) return count;
+      count++;
+      tmp = tmp.nextNode; // traverse
+    }
+
+    return null;
+  }
+
   // return a string representation of the entire linked list
   // e.g. ( val1 ) -> ( val2 ) -> ( val3 ) -> tmp
   toString() {
@@ -107,7 +136,11 @@ list.append('val4');
 // console.log(list.head()); // Node { value: 'val1', nextNode: { ... } }
 // console.log(list.tail()); // Node { value: 'val3', nextNode: null }
 // console.log(list.at(1)); // Node { value: 'val2', nextNode: { ... } }
-console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> ( val4 ) -> tmp
-list.pop();
+// console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> ( val4 ) -> tmp
+// list.pop();
+// console.log(list.contains('val3')); // true
+// console.log(list.contains('val5')); // false
+console.log(list.find('val3')); // 2
+console.log(list.find('val5')); // null
 
-console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> tmp
+// console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> tmp
