@@ -153,29 +153,3 @@ export default class LinkedList {
       : (tmp.nextNode = tmp.nextNode.nextNode);
   }
 }
-
-/* TESTS */
-
-const list = new LinkedList();
-list.append('val1');
-list.append('val2');
-list.append('val3');
-list.append('val4');
-
-// console.log(list.size()); // 2
-// console.log(list.head()); // Node { value: 'val1', nextNode: { ... } }
-// console.log(list.tail()); // Node { value: 'val3', nextNode: null }
-// console.log(list.at(1)); // Node { value: 'val2', nextNode: { ... } }
-// console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> ( val4 ) -> null
-list.pop();
-// console.log(list.contains('val3')); // true
-// console.log(list.contains('val5')); // false
-// console.log(list.find('val3')); // 2
-// console.log(list.find('val5')); // null
-
-console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> null
-
-list.insertAt('newVal', 1);
-console.log(list.toString()); // ( val1 ) -> ( newVal ) -> ( val2 ) -> ( val3 ) -> null
-list.insertAt('newNewVal', 2);
-console.log(list.toString()); // ( val1 ) -> ( newVal ) -> ( newNewVal ) -> ( val2 ) -> ( val3 ) -> null
