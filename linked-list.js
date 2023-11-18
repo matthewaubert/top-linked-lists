@@ -48,10 +48,20 @@ export default class LinkedList {
     return count;
   }
 
+  // return first node in the list
   head() {
-    return this.listHead.value;
+    return this.listHead;
   }
 
+  // return last node in the list
+  tail() {
+    let tmp = this.listHead; // point tmp to listHead
+    while (tmp.nextNode !== null) tmp = tmp.nextNode; // traverse to end
+    return tmp; // return last node
+  }
+
+  // return a string representation of the entire linked list
+  // e.g. ( val1 ) -> ( val2 ) -> ( val3 ) -> tmp
   toString() {
     let string = '';
 
@@ -69,7 +79,10 @@ export default class LinkedList {
 const list = new LinkedList();
 list.append('val1');
 list.append('val2');
-console.log(list.size()); // 2
-console.log(list.head()); // val1
+list.append('val3');
 
-console.log(list.toString()); // ( val1 ) -> ( val2 ) -> tmp
+console.log(list.size()); // 2
+console.log(list.head()); // Node { value: 'val1', nextNode: { ... } }
+console.log(list.tail()); // Node { value: 'val3', nextNode: null }
+
+console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> tmp
