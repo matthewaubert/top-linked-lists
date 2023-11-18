@@ -20,12 +20,16 @@ console.log(list.find('val5')); // null
 
 console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> null
 
+list.insertAt('firstVal', 0);
+console.log(list.toString()); // ( firstVal ) -> ( val1 ) -> ( newVal ) -> ( val2 ) -> ( val3 ) -> null
 list.insertAt('newVal', 1);
-console.log(list.toString()); // ( val1 ) -> ( newVal ) -> ( val2 ) -> ( val3 ) -> null
+console.log(list.toString()); // ( firstVal ) -> ( newVal ) -> ( val1 ) -> ( val2 ) -> ( val3 ) -> null
 list.insertAt('otherNewVal', 2);
-console.log(list.toString()); // ( val1 ) -> ( newVal ) -> ( otherNewVal ) -> ( val2 ) -> ( val3 ) -> null
+console.log(list.toString()); // ( firstVal ) -> ( newVal ) -> ( otherNewVal ) -> ( val1 ) -> ( val2 ) -> ( val3 ) -> null
 
 list.removeAt(2);
-console.log(list.toString()); // ( val1 ) -> ( newVal ) -> ( val2 ) -> ( val3 ) -> null
+console.log(list.toString()); // ( firstVal ) -> ( newVal ) -> ( val1 ) -> ( val2 ) -> ( val3 ) -> null
 list.removeAt(1);
+console.log(list.toString()); // ( firstVal ) -> ( val1 ) -> ( val2 ) -> ( val3 ) -> null
+list.removeAt(0);
 console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> null

@@ -121,35 +121,50 @@ export default class LinkedList {
 
   // insert a new node with the provided value at given index
   insertAt(value, index) {
-    if (index === 0) this.prepend(value); // if index is 0, prepend
-    let count = 0;
+    // if index is larger than list size, throw error
+    if (index > this.size() + 1) throw new Error('index too large');
 
-    let tmp = this.listHead; // point tmp to listHead
-    while (count < index - 1) {
-      tmp = tmp.nextNode; // traverse
-      count++;
+    // if index is 0, prepend value
+    if (index === 0) {
+      this.prepend(value);
+    } else {
+      let count = 0;
+
+      let tmp = this.listHead; // point tmp to listHead
+      while (count < index - 1) {
+        tmp = tmp.nextNode; // traverse
+        count++;
+      }
+  
+      // create new node pointing to tmp.nextNode
+      const newNode = new Node(value, tmp.nextNode);
+      // if index is 1, point listHead to new node; else, point tmp to new node
+      index === 1 ? (this.listHead.nextNode = newNode) : (tmp.nextNode = newNode);
     }
-
-    // create new node pointing to tmp.nextNode
-    const newNode = new Node(value, tmp.nextNode);
-    // if index is 1, point listHead to new node; else, point tmp to new node
-    index === 1 ? (this.listHead.nextNode = newNode) : (tmp.nextNode = newNode);
   }
 
   // remove node at given index
   removeAt(index) {
-    let count = 0;
+    // if index is larger than list size - 1, throw error
+    if (index > this.size() - 1) throw new Error('index too large');
 
-    let tmp = this.listHead; // point tmp to listHead
-    while (count < index - 1) {
-      tmp = tmp.nextNode; // traverse
-      count++;
+    // if index is 0, redirect set listHead to next value
+    if (index === 0) {
+      this.listHead = this.listHead.nextNode;
+    } else {
+      let count = 0;
+
+      let tmp = this.listHead; // point tmp to listHead
+      while (count < index - 1) {
+        tmp = tmp.nextNode; // traverse
+        count++;
+      }
+
+      // if index is 1, point listHead to listHead.nextNode.nextNode;
+      // else point tmp to tmp.nextNode.nextNode
+      index === 1
+        ? (this.listHead.nextNode = this.listHead.nextNode.nextNode)
+        : (tmp.nextNode = tmp.nextNode.nextNode);
     }
-
-    // if index is 1, point listHead to listHead.nextNode.nextNode;
-    // else point tmp to tmp.nextNode.nextNode
-    index === 1
-      ? (this.listHead.nextNode = this.listHead.nextNode.nextNode)
-      : (tmp.nextNode = tmp.nextNode.nextNode);
   }
 }
