@@ -7,13 +7,6 @@ export default class LinkedList {
     this.listHead = listHead; // pointer to start of linked list
   }
 
-  // traverse to end of list
-  // #traverse() {
-  //   let tmp = this.listHead;
-  //   while (tmp.nextNode !== null) tmp = tmp.nextNode;
-  //   return tmp;
-  // }
-
   // add a new value at the start of the linked list
   prepend(value) {
     // create a new listHead and point it to current listHead
@@ -67,7 +60,8 @@ export default class LinkedList {
     let tmp = this.listHead; // point tmp to listHead
     while (count < index) {
       tmp = tmp.nextNode; // traverse
-      count++; // increment count
+      if (tmp === null) return null; // edge case: index too large
+      count++;
     }
 
     return tmp;
@@ -124,6 +118,24 @@ export default class LinkedList {
     string += tmp; // add 'null' to end
     return string;
   }
+
+  // insert a new node with the provided value at given index
+  insertAt(value, index) {
+    if (index === 0) this.prepend(value); // if index is 0, prepend
+
+    let count = 0;
+
+    let tmp = this.listHead; // point tmp to listHead
+    while (count < index - 1) {
+      tmp = tmp.nextNode; // traverse
+      count++;
+    }
+
+    // create new node pointing to tmp.nextNode
+    const newNode = new Node(value, tmp.nextNode);
+    // if index is 1, point listHead to new node; else, point tmp to new node
+    index === 1 ? (this.listHead.nextNode = newNode) : (tmp.nextNode = newNode);
+  }
 }
 
 const list = new LinkedList();
@@ -136,11 +148,16 @@ list.append('val4');
 // console.log(list.head()); // Node { value: 'val1', nextNode: { ... } }
 // console.log(list.tail()); // Node { value: 'val3', nextNode: null }
 // console.log(list.at(1)); // Node { value: 'val2', nextNode: { ... } }
-// console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> ( val4 ) -> tmp
-// list.pop();
+// console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> ( val4 ) -> null
+list.pop();
 // console.log(list.contains('val3')); // true
 // console.log(list.contains('val5')); // false
-console.log(list.find('val3')); // 2
-console.log(list.find('val5')); // null
+// console.log(list.find('val3')); // 2
+// console.log(list.find('val5')); // null
 
-// console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> tmp
+console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> null
+
+list.insertAt('newVal', 1);
+console.log(list.toString()); // ( val1 ) -> ( newVal ) -> ( val2 ) -> ( val3 ) -> null
+list.insertAt('newNewVal', 2);
+console.log(list.toString()); // ( val1 ) -> ( newVal ) -> ( newNewVal ) -> ( val2 ) -> ( val3 ) -> null
