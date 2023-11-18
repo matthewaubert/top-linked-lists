@@ -33,3 +33,6 @@ list.removeAt(1);
 console.log(list.toString()); // ( firstVal ) -> ( val1 ) -> ( val2 ) -> ( val3 ) -> null
 list.removeAt(0);
 console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> null
+
+// list.insertAt('notGonnaWork', 10); // Error: index too large
+// list.removeAt(10); // Error: index too large
