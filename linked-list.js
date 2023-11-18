@@ -60,18 +60,39 @@ export default class LinkedList {
     return tmp; // return last node
   }
 
+  // return node at given index
+  at(index) {
+    let count = 0;
+
+    let tmp = this.listHead; // point tmp to listHead
+    while (count < index) {
+      tmp = tmp.nextNode; // traverse
+      count++; // increment count
+    }
+
+    return tmp;
+  }
+
+  // removes last element from the list
+  pop() {
+    let tmp = this.listHead; // point tmp to listHead
+    // traverse to second-to-last el
+    while (tmp.nextNode.nextNode !== null) tmp = tmp.nextNode;
+    tmp.nextNode = null; // point to null
+  }
+
   // return a string representation of the entire linked list
   // e.g. ( val1 ) -> ( val2 ) -> ( val3 ) -> tmp
   toString() {
     let string = '';
 
-    let tmp = this.listHead;
+    let tmp = this.listHead; // point tmp to listHead
     while (tmp !== null) {
-      string += `( ${tmp.value} ) -> `;
-      tmp = tmp.nextNode;
+      string += `( ${tmp.value} ) -> `; // add string rep of node to string var
+      tmp = tmp.nextNode; // traverse
     }
 
-    string += tmp;
+    string += tmp; // add 'null' to end
     return string;
   }
 }
@@ -80,9 +101,13 @@ const list = new LinkedList();
 list.append('val1');
 list.append('val2');
 list.append('val3');
+list.append('val4');
 
-console.log(list.size()); // 2
-console.log(list.head()); // Node { value: 'val1', nextNode: { ... } }
-console.log(list.tail()); // Node { value: 'val3', nextNode: null }
+// console.log(list.size()); // 2
+// console.log(list.head()); // Node { value: 'val1', nextNode: { ... } }
+// console.log(list.tail()); // Node { value: 'val3', nextNode: null }
+// console.log(list.at(1)); // Node { value: 'val2', nextNode: { ... } }
+console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> ( val4 ) -> tmp
+list.pop();
 
 console.log(list.toString()); // ( val1 ) -> ( val2 ) -> ( val3 ) -> tmp
