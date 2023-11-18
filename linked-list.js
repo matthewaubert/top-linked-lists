@@ -122,7 +122,6 @@ export default class LinkedList {
   // insert a new node with the provided value at given index
   insertAt(value, index) {
     if (index === 0) this.prepend(value); // if index is 0, prepend
-
     let count = 0;
 
     let tmp = this.listHead; // point tmp to listHead
@@ -136,7 +135,26 @@ export default class LinkedList {
     // if index is 1, point listHead to new node; else, point tmp to new node
     index === 1 ? (this.listHead.nextNode = newNode) : (tmp.nextNode = newNode);
   }
+
+  // remove node at given index
+  removeAt(index) {
+    let count = 0;
+
+    let tmp = this.listHead; // point tmp to listHead
+    while (count < index - 1) {
+      tmp = tmp.nextNode; // traverse
+      count++;
+    }
+
+    // if index is 1, point listHead to listHead.nextNode.nextNode;
+    // else point tmp to tmp.nextNode.nextNode
+    index === 1
+      ? (this.listHead.nextNode = this.listHead.nextNode.nextNode)
+      : (tmp.nextNode = tmp.nextNode.nextNode);
+  }
 }
+
+/* TESTS */
 
 const list = new LinkedList();
 list.append('val1');
